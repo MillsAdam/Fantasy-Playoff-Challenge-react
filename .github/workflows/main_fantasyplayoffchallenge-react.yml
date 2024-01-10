@@ -59,4 +59,4 @@ jobs:
           app-name: 'fantasyplayoffchallenge-react'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5FDA7C038EB548D397B693A13AE27458 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_178F7B4A31564AEB95A4D0C08D113CCE }}
