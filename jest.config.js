@@ -1,7 +1,10 @@
 module.exports = {
     transform: {
-      '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
-    },
-    // ... other configurations ...
+        '^.+\\.jsx?$': ['babel-jest', {presets: ['@babel/preset-env', '@babel/preset-react']}],
+      },
+      
+      transformIgnorePatterns: [
+        '/node_modules/(?!axios).+\\.js$'
+      ],
   };
   
