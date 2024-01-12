@@ -13,13 +13,24 @@ function NavigationBar() {
         navigate('/logout');
     }
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    }
+    // const toggleMenu = () => {
+    //     setIsMenuOpen(!isMenuOpen);
+    // }
 
-    const handleLinkClick = () => {
+    // const handleLinkClick = () => {
+    //     setIsMenuOpen(false);
+    // }
+
+    const handleMenuToggle = (event) => {
+        event.preventDefault();
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const handleMenuItemClick = (event, path) => {
+        event.preventDefault();
         setIsMenuOpen(false);
-    }
+        navigate(path);
+    };
     
 
     return (
@@ -57,7 +68,7 @@ function NavigationBar() {
                 </div>
                 <div className="lg:hidden">
                     <div className="dropdown dropdown-end">
-                        <button onClick={toggleMenu} tabIndex={0} className="btn btn-square btn-ghost">
+                        <button onClick={handleMenuToggle} onTouchStart={handleMenuToggle} tabIndex={0} className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"> 
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7"></path> 
                             </svg>
@@ -65,23 +76,23 @@ function NavigationBar() {
                         {authToken ? (
                             <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute w-full z-50 lg:w-auto`}>
                                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52" >
-                                    <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
-                                    <li><Link to="/league" onClick={handleLinkClick}>League</Link></li>
-                                    <li><Link to="/leaderboard" onClick={handleLinkClick}>Leaderboard</Link></li>
-                                    <li><Link to="/roster" onClick={handleLinkClick}>Roster</Link></li>
-                                    <li><Link to="/lineup" onClick={handleLinkClick}>Lineup</Link></li>
-                                    <li><Link to="/stats" onClick={handleLinkClick}>Stats</Link></li>
+                                    <li><Link to="/" onClick={(e) => handleMenuItemClick(e, '/')} onTouchStart={(e) => handleMenuItemClick(e, '/')}>Home</Link></li>
+                                    <li><Link to="/league" onClick={(e) => handleMenuItemClick(e, '/league')} onTouchStart={(e) => handleMenuItemClick(e, '/league')}>League</Link></li>
+                                    <li><Link to="/leaderboard" onClick={(e) => handleMenuItemClick(e, '/leaderboard')} onTouchStart={(e) => handleMenuItemClick(e, '/leaderboard')}>Leaderboard</Link></li>
+                                    <li><Link to="/roster" onClick={(e) => handleMenuItemClick(e, '/roster')} onTouchStart={(e) => handleMenuItemClick(e, '/roster')}>Roster</Link></li>
+                                    <li><Link to="/lineup" onClick={(e) => handleMenuItemClick(e, '/lineup')} onTouchStart={(e) => handleMenuItemClick(e, '/lineup')}>Lineup</Link></li>
+                                    <li><Link to="/stats" onClick={(e) => handleMenuItemClick(e, '/stats')} onTouchStart={(e) => handleMenuItemClick(e, '/stats')}>Stats</Link></li>
                                     <li><span onClick={handleLogoutClick}>Logout</span></li>
                                     {currentUser && currentUser.role === 'admin' && (
-                                        <li><Link to="/admin" onClick={handleLinkClick}>Admin</Link></li>
+                                        <li><Link to="/admin" onClick={(e) => handleMenuItemClick(e, '/admin')} onTouchStart={(e) => handleMenuItemClick(e, '/admin')}>Admin</Link></li>
                                     )}
                                 </ul>
                             </div>
                         ) : (
                             <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute w-full z-50 lg:w-auto`}>
                                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52">
-                                    <li><Link to="/login" onClick={handleLinkClick}>Login</Link></li>
-                                    <li><Link to="/register" onClick={handleLinkClick}>Register</Link></li>
+                                    <li><Link to="/login" onClick={(e) => handleMenuItemClick(e, '/login')} onTouchStart={(e) => handleMenuItemClick(e, '/login')}>Login</Link></li>
+                                    <li><Link to="/register" onClick={(e) => handleMenuItemClick(e, '/register')} onTouchStart={(e) => handleMenuItemClick(e, '/register')}>Register</Link></li>
                                 </ul>
                             </div>
                         
